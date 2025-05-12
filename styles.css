@@ -1,0 +1,24 @@
+p{
+    background-color: aqua;
+}
+
+header{
+    background-color: aliceblue;
+    color: beige;
+}
+
+a{
+    color: cadetblue;
+}
+
+nav ul li{
+    list-style-type: none;
+    display: inline;
+    text-decoration: none;
+}
+
+li{
+    padding: 10px;
+    text-decoration: none;
+}
+
