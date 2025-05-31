@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase de Display en CSS: Block, Inline, Flexbox y Grid</title>
+    <style>
+        /* --- ESTILOS GENERALES --- */
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1, h2, h3 {
+            color: #333;
+            margin-bottom: 0.5em;
+        }
+        h1 { text-align: center; color: #007bff; }
+        h2 { border-bottom: 2px solid #007bff; padding-bottom: 0.3em; margin-top: 40px; }
+        h3 { color: #555; margin-top: 30px; }
+
+        p, li {
+            margin-bottom: 0.8em;
+        }
+
+        code {
+            background-color: #e9e9e9;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .nota {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffeeba;
+            padding: 10px;
+            margin: 15px 0;
+        }
+
+        .ejercicio-area {
+            border: 2px dashed #ccc;
+            padding: 15px;
+            margin-top: 15px;
+            background-color: #f9f9f9;
+        }
+
+        .box {
+            padding: 15px;
+            margin: 5px;
+            border: 1px solid #666;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* --- ESTILOS PARA DISPLAY: BLOCK --- */
+        .block-example .box {
+            background-color: #ffcdd2; /* Rojo claro */
+            display: block;
+        }
+        .block-example .box1 { width: 50%; height: 50px; }
+        .block-example .box2 { width: auto; height: 70px; /* auto es el comportamiento por defecto para width */ }
+
+        /* --- ESTILOS PARA DISPLAY: INLINE --- */
+        .inline-example .box {
+            background-color: #c8e6c9; /* Verde claro */
+            display: inline;
+        }
+        .inline-example .box-special {
+            width: 200px; /* Intentaremos aplicar, pero no funcionará */
+            height: 100px; /* Intentaremos aplicar, pero no funcionará */
+            margin-top: 20px; /* Intentaremos aplicar, pero no funcionará */
+            padding: 20px; /* Padding horizontal sí, vertical afecta flujo */
+        }
+
+        /* --- ESTILOS PARA DISPLAY: INLINE-BLOCK --- */
+        .inline-block-example .box {
+            background-color: #bbdefb; /* Azul claro */
+            display: inline-block;
+            width: 150px;
+            height: 80px;
+            vertical-align: top; /* Útil para alinear inline-block elements */
+        }
+
+        /* --- ESTILOS PARA DISPLAY: FLEX --- */
+        .flex-container {
+            display: flex;
+            background-color: #e1bee7; /* Púrpura claro */
+            padding: 10px;
+            border: 2px solid #ab47bc;
+            height: 200px; /* Damos altura para ver align-items */
+        }
+
+        .flex-item {
+            background-color: #f8bbd0; /* Rosa claro */
+            color: #880e4f;
+            padding: 20px;
+            margin: 5px;
+            border: 1px solid #c2185b;
+            text-align: center;
+            /* width: 80px;  Comentado para ver flex-grow/shrink/basis */
+        }
+
+        /* Clases para ejercicios Flexbox */
+        .flex-direction-row { flex-direction: row; }
+        .flex-direction-column { flex-direction: column; height: 300px; /* Más altura para columna */}
+        .flex-direction-row-reverse { flex-direction: row-reverse; }
+        .flex-direction-column-reverse { flex-direction: column-reverse; height: 300px; }
+
+        .justify-content-start { justify-content: flex-start; }
+        .justify-content-end { justify-content: flex-end; }
+        .justify-content-center { justify-content: center; }
+        .justify-content-between { justify-content: space-between; }
+        .justify-content-around { justify-content: space-around; }
+        .justify-content-evenly { justify-content: space-evenly; }
+
+        .align-items-start { align-items: flex-start; }
+        .align-items-end { align-items: flex-end; }
+        .align-items-center { align-items: center; }
+        .align-items-stretch { align-items: stretch; } /* Necesita que los items no tengan altura definida */
+        .align-items-baseline { align-items: baseline; } /* Los items necesitan texto para que se vea */
+
+        .flex-wrap-nowrap { flex-wrap: nowrap; width: 300px; /* Forzar overflow */}
+        .flex-wrap-wrap { flex-wrap: wrap; width: 300px; }
+        .flex-wrap-wrap-reverse { flex-wrap: wrap-reverse; width: 300px; }
+
+        .item-grow-1 .flex-item:nth-child(1) { flex-grow: 1; }
+        .item-grow-2 .flex-item:nth-child(2) { flex-grow: 2; }
+
+        .item-shrink .flex-item { flex-basis: 150px; } /* Dar base para que shrink funcione */
+        .item-shrink .flex-item:nth-child(1) { flex-shrink: 1; }
+        .item-shrink .flex-item:nth-child(2) { flex-shrink: 2; } /* Se encogerá más */
+        /* Para probar shrink, el contenedor debe ser más pequeño que la suma de los flex-basis de los hijos */
+        .item-shrink.flex-container { width: 300px; }
+
+
+        .item-basis .flex-item:nth-child(1) { flex-basis: 100px; }
+        .item-basis .flex-item:nth-child(2) { flex-basis: 200px; }
+
+        .item-order .flex-item:nth-child(1) { order: 3; }
+        .item-order .flex-item:nth-child(2) { order: 1; }
+        .item-order .flex-item:nth-child(3) { order: 2; }
+
+        .item-align-self .flex-item:nth-child(2) { align-self: flex-end; background-color: #ffeb3b; } /* Amarillo */
+        .item-align-self .flex-item:nth-child(3) { align-self: center; background-color: #ffeb3b; }
+
+
+        /* --- ESTILOS PARA DISPLAY: GRID --- */
+        .grid-container {
+            display: grid;
+            background-color: #ffe0b2; /* Naranja claro */
+            padding: 10px;
+            border: 2px solid #f57c00;
+            /* Definición básica de columnas y filas */
+            /* grid-template-columns: auto auto auto; */
+            /* grid-template-rows: 100px 100px; */
+            gap: 10px; /* Espacio entre celdas */
+        }
+
+        .grid-item {
+            background-color: #ffcc80; /* Naranja más oscuro */
+            color: #e65100;
+            padding: 20px;
+            border: 1px solid #ef6c00;
+            text-align: center;
+        }
+
+        /* Clases para ejercicios Grid */
+        .grid-cols-fr { grid-template-columns: 1fr 2fr 1fr; }
+        .grid-cols-px-auto { grid-template-columns: 100px auto 150px; }
+        .grid-cols-repeat { grid-template-columns: repeat(3, 1fr); } /* Tres columnas de igual ancho */
+
+        .grid-rows-px { grid-template-rows: 50px 100px; }
+        .grid-rows-minmax { grid-template-rows: minmax(100px, auto) 150px; }
+
+        .grid-item-span-col .grid-item:nth-child(1) {
+            grid-column-start: 1;
+            grid-column-end: 3; /* Ocupa desde la línea 1 a la 3 (2 columnas) */
+            /* Alternativa: grid-column: 1 / 3; */
+            /* Alternativa: grid-column: span 2; */
+            background-color: #fff176; /* Amarillo */
+        }
+
+        .grid-item-span-row .grid-item:nth-child(2) {
+            grid-row-start: 1;
+            grid-row-end: 3; /* Ocupa desde la línea 1 a la 3 (2 filas) */
+            /* Alternativa: grid-row: 1 / 3; */
+            /* Alternativa: grid-row: span 2; */
+            background-color: #a5d6a7; /* Verde */
+        }
+        /* Para que se vea bien el span de filas, definamos unas filas */
+        .grid-item-span-row.grid-container { grid-template-rows: repeat(2, 100px); }
+
+
+        .grid-areas-container {
+            display: grid;
+            gap: 10px;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: auto auto auto;
+            grid-template-areas:
+                "header header header"
+                "sidebar main main"
+                "footer footer footer";
+        }
+        .grid-area-header { grid-area: header; background-color: #81d4fa; }
+        .grid-area-sidebar { grid-area: sidebar; background-color: #a5d6a7; }
+        .grid-area-main { grid-area: main; background-color: #fff176; }
+        .grid-area-footer { grid-area: footer; background-color: #ffab91; }
+
+        .grid-justify-items-center { justify-items: center; } /* Alinear contenido DENTRO de la celda horizontalmente */
+        .grid-align-items-center { align-items: center; } /* Alinear contenido DENTRO de la celda verticalmente */
+        /* Para que se vea, las celdas deben ser más grandes que el contenido */
+        .grid-justify-items-center .grid-item, .grid-align-items-center .grid-item { width: 50%; margin: 0 auto; }
+
+        .grid-justify-content-center { justify-content: center; } /* Alinear la parrilla completa horizontalmente (si es más pequeña que el contenedor) */
+        .grid-align-content-center { align-content: center; height: 400px; } /* Alinear la parrilla completa verticalmente (si es más pequeña y tiene altura) */
+        /* Para que se vea, la parrilla debe ser más pequeña que su contenedor. */
+        .grid-justify-content-center.grid-container { width: 80%; margin: 0 auto; grid-template-columns: 100px 100px; }
+        .grid-align-content-center.grid-container { grid-template-columns: 100px 100px; grid-template-rows: 50px 50px; }
+
+        .grid-item-self-align .grid-item:nth-child(1) { justify-self: start; background-color: #ffccbc; }
+        .grid-item-self-align .grid-item:nth-child(2) { align-self: end; background-color: #ffccbc; }
+        /* Para que se vea, las celdas deben ser más grandes que el contenido */
+        .grid-item-self-align.grid-container { grid-template-columns: 200px 200px; grid-template-rows: 100px; }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Clase de Propiedad `display` en CSS</h1>
+        <p>Esta clase cubrirá los valores fundamentales de la propiedad <code>display</code>: <code>block</code>, <code>inline</code>, <code>inline-block</code>, y los sistemas de layout modernos <code>flex</code> y <code>grid</code>.</p>
+
+        <!-- ======================================================================================= -->
+        <!-- =============================== DISPLAY: BLOCK ======================================== -->
+        <!-- ======================================================================================= -->
+        <section id="display-block">
+            <h2><code>display: block</code> (Elementos de Bloque)</h2>
+            <p>Los elementos con <code>display: block</code> tienen las siguientes características:</p>
+            <ul>
+                <li><strong>Ocupan todo el ancho disponible</strong> por defecto, creando un "bloque".</li>
+                <li><strong>Comienzan en una nueva línea.</strong></li>
+                <li>Respetan las propiedades <code>width</code>, <code>height</code>, <code>margin</code> (vertical y horizontal) y <code>padding</code>.</li>
+                <li>Ejemplos comunes: <code>&lt;div&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;h1&gt;</code>-<code>&lt;h6&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;li&gt;</code>, <code>&lt;section&gt;</code>.</li>
+            </ul>
+
+            <div class="ejercicio-area block-example">
+                <h3>Ejemplo Práctico: <code>display: block</code></h3>
+                <div class="box box1">Soy un bloque (width: 50%, height: 50px)</div>
+                <div class="box box2">Soy otro bloque (width: auto, height: 70px)</div>
+                <p>Observa cómo cada <code>div</code> (que es <code>block</code> por defecto) ocupa su propia línea y respeta el ancho y alto.</p>
+            </div>
+
+            <h4>Para Probar (Ejercicios con <code>display: block</code>):</h4>
+            <ol>
+                <li>Abre las herramientas de desarrollador (F12) y selecciona uno de los <code>.box</code>.</li>
+                <li>Cambia el valor de <code>width</code> a <code>200px</code>. Observa el cambio.</li>
+                <li>Cambia el valor de <code>height</code>.</li>
+                <li>Añade <code>margin-top: 30px;</code> a <code>.block-example .box1</code>. Observa el espacio.</li>
+                <li>Intenta poner <code>display: inline;</code> a uno de los <code>.box</code>. ¿Qué sucede? (Lo veremos luego).</li>
+            </ol>
+        </section>
+
+        <!-- ======================================================================================= -->
+        <!-- =============================== DISPLAY: INLINE ======================================= -->
+        <!-- ======================================================================================= -->
+        <section id="display-inline">
+            <h2><code>display: inline</code> (Elementos en Línea)</h2>
+            <p>Los elementos con <code>display: inline</code> tienen las siguientes características:</p>
+            <ul>
+                <li><strong>Ocupan solo el ancho necesario</strong> para su contenido.</li>
+                <li><strong>No comienzan en una nueva línea</strong>, fluyen con el texto circundante.</li>
+                <li><strong>No respetan</strong> <code>width</code> ni <code>height</code>.</li>
+                <li>Respetan <code>padding</code> y <code>margin</code> horizontales (<code>left</code>/<code>right</code>).</li>
+                <li><code>padding</code> y <code>margin</code> verticales (<code>top</code>/<code>bottom</code>) pueden tener efectos visuales, pero no afectan el layout de otros elementos (pueden superponerse).</li>
+                <li>Ejemplos comunes: <code>&lt;span&gt;</code>, <code>&lt;a&gt;</code>, <code>&lt;img&gt;</code> (aunque <code>img</code> es un caso especial, se comporta más como inline-block), <code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code>.</li>
+            </ul>
+
+            <div class="ejercicio-area inline-example">
+                <h3>Ejemplo Práctico: <code>display: inline</code></h3>
+                <p>
+                    Este es un texto con un <span class="box">elemento inline</span> y
+                    <span class="box box-special">otro elemento inline (con width/height intentados)</span>.
+                    Observa cómo fluyen y cómo <code>width</code> y <code>height</code> son ignorados en <code>.box-special</code>.
+                </p>
+            </div>
+
+            <h4>Para Probar (Ejercicios con <code>display: inline</code>):</h4>
+            <ol>
+                <li>Selecciona el <code>.inline-example .box-special</code> en las herramientas de desarrollador.</li>
+                <li>Verifica que <code>width: 200px;</code> y <code>height: 100px;</code> están aplicados pero no tienen efecto.</li>
+                <li>Cambia el <code>padding-left</code> y <code>padding-right</code>. Observa que sí funcionan.</li>
+                <li>Cambia el <code>margin-top</code> o <code>padding-top</code>. Observa que puede solaparse con el texto de arriba/abajo sin empujarlo.</li>
+                <li>Intenta poner <code>display: block;</code> al <code>.box-special</code>. ¿Qué sucede?</li>
+            </ol>
+        </section>
+
+        <!-- ======================================================================================= -->
+        <!-- =============================== DISPLAY: INLINE-BLOCK ================================= -->
+        <!-- ======================================================================================= -->
+        <section id="display-inline-block">
+            <h2><code>display: inline-block</code> (Bloque en Línea)</h2>
+            <p>Combina características de <code>block</code> e <code>inline</code>:</p>
+            <ul>
+                <li><strong>Se colocan en la misma línea</strong> que otros elementos (como <code>inline</code>).</li>
+                <li><strong>Respetan <code>width</code>, <code>height</code>, <code>margin</code> (vertical y horizontal) y <code>padding</code></strong> (como <code>block</code>).</li>
+                <li>El ancho por defecto es el necesario para su contenido (como <code>inline</code>), a menos que se especifique un <code>width</code>.</li>
+                <li>Es muy útil para crear elementos de navegación, botones, o pequeñas cajas que deben estar una al lado de la otra y tener dimensiones específicas.</li>
+                <li>Una cosa a tener en cuenta es el espacio en blanco en el HTML entre elementos <code>inline-block</code>, que se renderiza como un espacio. Se puede solucionar con varios trucos (ej. font-size: 0 en el padre).</li>
+            </ul>
+
+            <div class="ejercicio-area inline-block-example">
+                <h3>Ejemplo Práctico: <code>display: inline-block</code></h3>
+                <div class="box">Caja 1 (W:150 H:80)</div>
+                <div class="box">Caja 2 (W:150 H:80)</div>
+                <div class="box">Caja 3 (W:150 H:80)</div>
+                <p>Observa cómo las cajas están en línea pero respetan sus dimensiones. La propiedad <code>vertical-align</code> puede ser útil para alinearlos.</p>
+            </div>
+
+            <h4>Para Probar (Ejercicios con <code>display: inline-block</code>):</h4>
+            <ol>
+                <li>Cambia el <code>width</code> o <code>height</code> de una de las cajas.</li>
+                <li>Añade <code>margin-left: 20px;</code> a la segunda caja.</li>
+                <li>Cambia <code>vertical-align</code> en <code>.inline-block-example .box</code> a <code>middle</code> o <code>bottom</code>.</li>
+                <li>Añade más cajas. Observa cómo pasan a la siguiente línea si no caben.</li>
+                <li>Elimina los saltos de línea entre los divs en el HTML. ¿Ves cómo desaparece el espacio entre ellos?</li>
+            </ol>
+        </section>
+
+        <div class="nota">
+            <p><strong>Resumen rápido hasta ahora:</strong></p>
+            <ul>
+                <li><code>block</code>: Nueva línea, ancho completo, respeta W/H/M/P.</li>
+                <li><code>inline</code>: Misma línea, ancho de contenido, NO respeta W/H, M/P verticales "raros".</li>
+                <li><code>inline-block</code>: Misma línea, respeta W/H/M/P. ¡Lo mejor de dos mundos para ciertos casos!</li>
+            </ul>
+        </div>
+
+        <!-- ======================================================================================= -->
+        <!-- =============================== DISPLAY: FLEX (FLEXBOX) =============================== -->
+        <!-- ======================================================================================= -->
+        <section id="display-flex">
+            <h2><code>display: flex</code> (Flexbox)</h2>
+            <p>Flexbox es un modelo de layout unidimensional diseñado para distribuir espacio entre ítems en un contenedor, incluso cuando sus tamaños son desconocidos o dinámicos. Se activa aplicando <code>display: flex</code> al contenedor padre.</p>
+            
+            <h3>Propiedades del Contenedor Flex (Padre)</h3>
+            <ul>
+                <li><code>flex-direction</code>: Define el eje principal (<code>row</code>, <code>row-reverse</code>, <code>column</code>, <code>column-reverse</code>).</li>
+                <li><code>justify-content</code>: Alinea los ítems en el eje principal (<code>flex-start</code>, <code>flex-end</code>, <code>center</code>, <code>space-between</code>, <code>space-around</code>, <code>space-evenly</code>).</li>
+                <li><code>align-items</code>: Alinea los ítems en el eje secundario (perpendicular al principal) (<code>flex-start</code>, <code>flex-end</code>, <code>center</code>, <code>stretch</code>, <code>baseline</code>).</li>
+                <li><code>flex-wrap</code>: Controla si los ítems deben envolverse en múltiples líneas (<code>nowrap</code>, <code>wrap</code>, <code>wrap-reverse</code>).</li>
+                <li><code>align-content</code>: Similar a <code>justify-content</code>, pero para alinear las líneas de ítems cuando hay <code>flex-wrap: wrap</code> y espacio extra en el eje secundario.</li>
+                <li><code>gap</code>, <code>row-gap</code>, <code>column-gap</code>: Define el espacio entre los ítems.</li>
+            </ul>
+
+            <h3>Propiedades de los Ítems Flex (Hijos)</h3>
+            <ul>
+                <li><code>flex-grow</code>: Factor de crecimiento de un ítem si hay espacio extra.</li>
+                <li><code>flex-shrink</code>: Factor de encogimiento si no hay suficiente espacio.</li>
+                <li><code>flex-basis</code>: Tamaño inicial del ítem antes de distribuir el espacio.</li>
+                <li><code>flex</code>: Atajo para <code>flex-grow</code>, <code>flex-shrink</code> y <code>flex-basis</code>.</li>
+                <li><code>order</code>: Orden visual de los ítems.</li>
+                <li><code>align-self</code>: Sobrescribe <code>align-items</code> para un ítem individual.</li>
+            </ul>
+
+            <div class="ejercicio-area">
+                <h3>Ejemplo Básico Flexbox:</h3>
+                <div class="flex-container" id="basicFlexContainer">
+                    <div class="flex-item">Ítem 1</div>
+                    <div class="flex-item">Ítem 2</div>
+                    <div class="flex-item">Ítem 3</div>
+                </div>
+            </div>
+
+            <h4>Para Probar (Ejercicios con Flexbox):</h4>
+            <p>Modifica el contenedor (<code>#basicFlexContainer</code>) y sus ítems (<code>.flex-item</code>) usando las clases predefinidas o añadiendo estilos directamente en las herramientas del desarrollador.</p>
+
+            <ol>
+                <li>
+                    <strong><code>flex-direction</code></strong>:
+                    Añade/cambia la clase en <code>#basicFlexContainer</code>:
+                    <code>flex-direction-row</code> (defecto),
+                    <code>flex-direction-column</code>,
+                    <code>flex-direction-row-reverse</code>,
+                    <code>flex-direction-column-reverse</code>.
+                    <div class="ejercicio-area">
+                        <div class="flex-container flex-direction-column">
+                            <div class="flex-item">Dir: Col 1</div> <div class="flex-item">Dir: Col 2</div> <div class="flex-item">Dir: Col 3</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <strong><code>justify-content</code></strong> (con <code>flex-direction: row</code>):
+                    Añade/cambia la clase en <code>#basicFlexContainer</code>:
+                    <code>justify-content-start</code>,
+                    <code>justify-content-end</code>,
+                    <code>justify-content-center</code>,
+                    <code>justify-content-between</code>,
+                    <code>justify-content-around</code>,
+                    <code>justify-content-evenly</code>.
+                    <div class="ejercicio-area">
+                        <div class="flex-container justify-content-between">
+                            <div class="flex-item">Justify 1</div> <div class="flex-item">Justify 2</div> <div class="flex-item">Justify 3</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <strong><code>align-items</code></strong> (con <code>flex-direction: row</code> y altura en contenedor):
+                    Añade/cambia la clase en <code>#basicFlexContainer</code>:
+                    <code>align-items-start</code>,
+                    <code>align-items-end</code>,
+                    <code>align-items-center</code>,
+                    <code>align-items-stretch</code> (quita altura fija de los ítems para ver efecto),
+                    <code>align-items-baseline</code> (mejor con texto de distinto tamaño en los ítems).
+                    <div class="ejercicio-area">
+                        <div class="flex-container align-items-center" style="height: 150px;">
+                            <div class="flex-item" style="height: auto;">Align 1</div> <div class="flex-item" style="font-size: 2em; height: auto;">Align 2</div> <div class="flex-item" style="height: auto;">Align 3</div>
+                        </div>
+                        <p class="nota">Para <code>stretch</code>, los ítems no deben tener altura definida. Para <code>baseline</code>, es mejor con texto.</p>
+                    </div>
+                </li>
+                <li>
+                    <strong><code>flex-wrap</code></strong>:
+                    Añade/cambia la clase en <code>#basicFlexContainer</code> y asegúrate que el contenedor sea más estrecho que la suma de los anchos de los ítems (p.ej. <code>width: 300px</code> en el contenedor, y cada item <code>width: 100px</code> por defecto con su padding/margin):
+                    <code>flex-wrap-nowrap</code> (defecto),
+                    <code>flex-wrap-wrap</code>,
+                    <code>flex-wrap-wrap-reverse</code>.
+                    <div class="ejercicio-area">
+                        <div class="flex-container flex-wrap-wrap" style="width: 250px; height: auto;">
+                            <div class="flex-item" style="width: 80px;">Wrap 1</div> <div class="flex-item" style="width: 80px;">Wrap 2</div> <div class="flex-item" style="width: 80px;">Wrap 3</div> <div class="flex-item" style="width: 80px;">Wrap 4</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <strong><code>flex-grow</code></strong>:
+                    Aplica la clase <code>item-grow-1</code> o <code>item-grow-2</code> al <code>#basicFlexContainer</code>. Observa cómo los ítems crecen para llenar el espacio.
+                    <div class="ejercicio-area">
+                        <div class="flex-container item-grow-1 item-grow-2">
+                             <div class="flex-item">Grow 1 (g:1)</div> <div class="flex-item">Grow 2 (g:2)</div> <div class="flex-item">Grow 3</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <strong><code>flex-shrink</code></strong>:
+                    Aplica la clase <code>item-shrink</code> al <code>#basicFlexContainer</code> (que tiene <code>width: 300px</code>) y los ítems tienen <code>flex-basis: 150px</code>. Los ítems se encogerán.
+                    <div class="ejercicio-area">
+                        <div class="flex-container item-shrink" style="width: 300px;">
+                             <div class="flex-item">Shrink 1 (s:1)</div> <div class="flex-item">Shrink 2 (s:2)</div> <div class="flex-item">Shrink 3 (s:0)</div>
+                        </div>
+                        <p class="nota">El total de <code>flex-basis</code> (150*3=450px) es mayor que el ancho del contenedor (300px). El ítem 2 se encogerá más.</p>
+                    </div>
+                </li>
+                <li>
+                    <strong><code>flex-basis</code></strong>:
+                    Aplica la clase <code>item-basis</code> al <code>#basicFlexContainer</code>. Observa los tamaños iniciales.
+                    <div class="ejercicio-area">
+                        <div class="flex-container item-basis">
+                             <div class="flex-item">Basis 1 (100px)</div> <div class="flex-item">Basis 2 (200px)</div> <div class="flex-item">Basis 3 (auto)</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <strong><code>order</code></strong>:
+                    Aplica la clase <code>item-order</code> al <code>#basicFlexContainer</code>.
+                    <div class="ejercicio-area">
+                        <div class="flex-container item-order">
+                             <div class="flex-item">Original 1 (order:3)</div> <div class="flex-item">Original 2 (order:1)</div> <div class="flex-item">Original 3 (order:2)</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <strong><code>align-self</code></strong>:
+                    Aplica la clase <code>item-align-self</code> al <code>#basicFlexContainer</code> (que tiene <code>align-items: flex-start</code> por defecto o puede ser explícito). El segundo y tercer ítem se alinearán diferente.
+                    <div class="ejercicio-area">
+                        <div class="flex-container item-align-self" style="height: 150px; align-items: flex-start;">
+                             <div class="flex-item">Self 1</div> <div class="flex-item">Self 2 (end)</div> <div class="flex-item">Self 3 (center)</div>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+        </section>
+
+        <!-- ======================================================================================= -->
+        <!-- =============================== DISPLAY: GRID ========================================= -->
+        <!-- ======================================================================================= -->
+        <section id="display-grid">
+            <h2><code>display: grid</code> (CSS Grid Layout)</h2>
+            <p>CSS Grid es un sistema de layout bidimensional que permite organizar el contenido en filas y columnas. Es muy potente para layouts complejos de página.</p>
+
+            <h3>Propiedades del Contenedor Grid (Padre)</h3>
+            <ul>
+                <li><code>grid-template-columns</code>: Define las columnas de la cuadrícula (ej: <code>1fr 1fr 1fr</code>, <code>100px auto 200px</code>, <code>repeat(3, 1fr)</code>).</li>
+                <li><code>grid-template-rows</code>: Define las filas de la cuadrícula (ej: <code>100px 200px</code>, <code>minmax(100px, auto)</code>).</li>
+                <li><code>gap</code> (o <code>grid-gap</code>): Espacio entre celdas (atajo para <code>row-gap</code> y <code>column-gap</code>).</li>
+                <li><code>grid-template-areas</code>: Define una plantilla nombrando áreas de la cuadrícula.</li>
+                <li><code>justify-items</code>: Alinea el contenido DENTRO de las celdas del grid en el eje de fila (horizontal). (<code>start</code>, <code>end</code>, <code>center</code>, <code>stretch</code>).</li>
+                <li><code>align-items</code>: Alinea el contenido DENTRO de las celdas del grid en el eje de columna (vertical). (<code>start</code>, <code>end</code>, <code>center</code>, <code>stretch</code>).</li>
+                <li><code>justify-content</code>: Alinea la cuadrícula completa dentro de su contenedor en el eje de fila (si la cuadrícula es más pequeña que el contenedor).</li>
+                <li><code>align-content</code>: Alinea la cuadrícula completa dentro de su contenedor en el eje de columna (si la cuadrícula es más pequeña que el contenedor y tiene altura definida).</li>
+            </ul>
+
+            <h3>Propiedades de los Ítems Grid (Hijos)</h3>
+            <ul>
+                <li><code>grid-column-start</code> / <code>grid-column-end</code>: Dónde empieza/termina un ítem en las columnas.</li>
+                <li><code>grid-row-start</code> / <code>grid-row-end</code>: Dónde empieza/termina un ítem en las filas.</li>
+                <li><code>grid-column</code>: Atajo para <code>grid-column-start</code> / <code>grid-column-end</code>.</li>
+                <li><code>grid-row</code>: Atajo para <code>grid-row-start</code> / <code>grid-row-end</code>.</li>
+                <li><code>grid-area</code>: Asigna un ítem a un área nombrada (definida con <code>grid-template-areas</code>) o es un atajo para las 4 propiedades anteriores.</li>
+                <li><code>justify-self</code>: Sobrescribe <code>justify-items</code> para un ítem individual.</li>
+                <li><code>align-self</code>: Sobrescribe <code>align-items</code> para un ítem individual.</li>
+            </ul>
+
+            <div class="ejercicio-area">
+                <h3>Ejemplo Básico Grid:</h3>
+                <div class="grid-container" id="basicGridContainer">
+                    <div class="grid-item">Ítem A</div>
+                    <div class="grid-item">Ítem B</div>
+                    <div class="grid-item">Ítem C</div>
+                    <div class="grid-item">Ítem D</div>
+                    <div class="grid-item">Ítem E</div>
+                    <div class="grid-item">Ítem F</div>
+                </div>
+                <p class="nota">Por defecto, sin <code>grid-template-columns</code> o <code>rows</code>, los ítems se apilan en una sola columna o se ajustan si tienen tamaño intrínseco. Para que se vea una cuadrícula, ¡hay que definirla!</p>
+            </div>
+
+            <h4>Para Probar (Ejercicios con Grid):</h4>
+            <p>Modifica el contenedor (<code>#basicGridContainer</code>) y sus ítems (<code>.grid-item</code>) usando las clases predefinidas o añadiendo estilos directamente.</p>
+            <ol>
+                <li>
+                    <strong><code>grid-template-columns</code></strong>:
+                    Aplica a <code>#basicGridContainer</code> o crea un nuevo contenedor con estas clases:
+                    <code>grid-cols-fr</code> (<code>1fr 2fr 1fr</code>),
+                    <code>grid-cols-px-auto</code> (<code>100px auto 150px</code>),
+                    <code>grid-cols-repeat</code> (<code>repeat(3, 1fr)</code>).
+                    <div class="ejercicio-area">
+                        <div class="grid-container grid-cols-fr">
+                            <div class="grid-item">Col 1 (1fr)</div><div class="grid-item">Col 2 (2fr)</div><div class="grid-item">Col 3 (1fr)</div>
+                            <div class="grid-item">Col 1</div><div class="grid-item">Col 2</div><div class="grid-item">Col 3</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <strong><code>grid-template-rows</code></strong>:
+                    Aplica a un contenedor con columnas definidas:
+                    <code>grid-rows-px</code> (<code>50px 100px</code>),
+                    <code>grid-rows-minmax</code> (<code>minmax(100px, auto) 150px</code>).
+                    <div class="ejercicio-area">
+                        <div class="grid-container grid-cols-repeat grid-rows-px">
+                            <div class="grid-item">R1C1 (50px H)</div><div class="grid-item">R1C2</div><div class="grid-item">R1C3</div>
+                            <div class="grid-item">R2C1 (100px H)</div><div class="grid-item">R2C2</div><div class="grid-item">R2C3</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <strong><code>gap</code></strong>:
+                    Ya está aplicado <code>gap: 10px;</code>. Prueba a cambiarlo a <code>20px</code> o <code>5px</code>.
+                    Prueba <code>column-gap: 30px;</code> y <code>row-gap: 5px;</code>.
+                </li>
+                <li>
+                    <strong>Expansión de Ítems (<code>grid-column</code> / <code>grid-row</code>)</strong>:
+                    Aplica <code>grid-item-span-col</code> al contenedor para ver el primer ítem expandirse.
+                    Aplica <code>grid-item-span-row</code> para ver el segundo ítem expandirse (asegúrate que haya filas definidas).
+                    <div class="ejercicio-area">
+                        <div class="grid-container grid-cols-repeat grid-item-span-col grid-item-span-row">
+                            <div class="grid-item">Span Col</div>
+                            <div class="grid-item">Span Row</div>
+                            <div class="grid-item">Item 3</div>
+                            <div class="grid-item">Item 4</div>
+                            <div class="grid-item">Item 5</div>
+                            <div class="grid-item">Item 6</div>
+                        </div>
+                        <p class="nota">El primer ítem ocupa las columnas 1 y 2. El segundo ítem ocupa las filas 1 y 2 (de la columna 3, si el primero no la ocupara).</p>
+                    </div>
+                </li>
+                <li>
+                    <strong><code>grid-template-areas</code></strong>:
+                    Crea un layout de página básico.
+                    <div class="ejercicio-area">
+                        <div class="grid-areas-container">
+                            <div class="grid-item grid-area-header">Header</div>
+                            <div class="grid-item grid-area-sidebar">Sidebar</div>
+                            <div class="grid-item grid-area-main">Main Content</div>
+                            <div class="grid-item grid-area-footer">Footer</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <strong>Alineación de contenido DENTRO de celdas (<code>justify-items</code>, <code>align-items</code>)</strong>:
+                    Aplica <code>grid-justify-items-center</code> o <code>grid-align-items-center</code> al contenedor.
+                    <div class="ejercicio-area">
+                        <div class="grid-container grid-cols-repeat grid-justify-items-center grid-align-items-center" style="grid-template-rows: 100px 100px;">
+                            <div class="grid-item">JA:Center AA:Center</div><div class="grid-item">Item</div><div class="grid-item">Item</div>
+                            <div class="grid-item">Item</div><div class="grid-item">Item</div><div class="grid-item">Item</div>
+                        </div>
+                        <p class="nota"><code>justify-items</code> es horizontal, <code>align-items</code> es vertical DENTRO de la celda.</p>
+                    </div>
+                </li>
+                 <li>
+                    <strong>Alineación de la PARRILLA COMPLETA (<code>justify-content</code>, <code>align-content</code>)</strong>:
+                    Aplica <code>grid-justify-content-center</code> o <code>grid-align-content-center</code> al contenedor. La parrilla debe ser más pequeña que su contenedor para ver el efecto.
+                    <div class="ejercicio-area">
+                        <p>Ejemplo <code>justify-content</code> (parrilla más estrecha):</p>
+                        <div class="grid-container grid-justify-content-center">
+                            <div class="grid-item">JC: C1</div><div class="grid-item">JC: C2</div>
+                            <div class="grid-item">JC: C1</div><div class="grid-item">JC: C2</div>
+                        </div>
+                        <p style="margin-top:15px;">Ejemplo <code>align-content</code> (parrilla más baja y con altura fija en contenedor):</p>
+                         <div class="grid-container grid-align-content-center">
+                            <div class="grid-item">AC: R1</div><div class="grid-item">AC: R1</div>
+                            <div class="grid-item">AC: R2</div><div class="grid-item">AC: R2</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <strong>Alineación individual de Ítems (<code>justify-self</code>, <code>align-self</code>)</strong>:
+                    Aplica <code>grid-item-self-align</code> al contenedor.
+                    <div class="ejercicio-area">
+                        <div class="grid-container grid-item-self-align">
+                            <div class="grid-item">JS: start</div>
+                            <div class="grid-item">AS: end</div>
+                            <div class="grid-item">Normal</div>
+                        </div>
+                         <p class="nota">El primer ítem se alinea a la izquierda de su celda, el segundo al final (abajo) de su celda.</p>
+                    </div>
+                </li>
+            </ol>
+        </section>
+
+        <section id="conclusion">
+            <h2>Conclusión y Próximos Pasos</h2>
+            <p>¡Felicidades! Has explorado los fundamentos de <code>block</code>, <code>inline</code>, <code>inline-block</code>, y los potentes sistemas de layout <code>flexbox</code> y <code>grid</code>.</p>
+            <p><strong>La clave es la práctica:</strong></p>
+            <ul>
+                <li>Intenta recrear layouts de páginas web sencillas.</li>
+                <li>Combina flexbox y grid: grid para el layout general de la página, flexbox para componentes internos.</li>
+                <li>Consulta recursos como MDN Web Docs, CSS-Tricks (Flexbox Guide, Grid Guide) para profundizar.</li>
+                <li>Juega con herramientas interactivas online como Flexbox Froggy o Grid Garden.</li>
+            </ul>
+            <p>Entender cómo se muestran y posicionan los elementos es crucial para construir cualquier interfaz web. ¡Sigue experimentando!</p>
+        </section>
+
+    </div>
+
+</body>
+</html> 
