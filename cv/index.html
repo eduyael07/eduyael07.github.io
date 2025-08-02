@@ -1,0 +1,142 @@
+<!-- PÁGINA QUE EJEMPLIFICA CADA TEMA DEL TEMARIO -->
+
+<!DOCTYPE html> <!-- b. Estructura de un documento HTML -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8"> <!-- k. MetaTags -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- k. MetaTags -->
+  <meta name="description" content="Mi CV"> <!-- k. MetaTags -->
+  <link rel="stylesheet" href="style2.css"> <!-- k. MetaTags -->
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> <!-- k. MetaTags -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"> <!-- f. Iconos -->
+  <title>Mi primera página web</title>
+</head>
+<body>
+
+  <header class="hero"> <!-- l. header -->
+    <div class="hero-content">
+      <h1>Nombre Apellido</h1> <!-- d. Encabezados -->
+      <p>Aquí poner a que me dedico</p> <!-- e. Texto -->
+      <a href="#contacto" class="btn">Contáctame</a> <!-- i. Enlace -->
+    </div>
+  </header>
+
+  <nav> <!-- l. nav -->
+    <ul> <!-- g. Lista -->
+      <li><a href="#perfil">Perfil</a></li>
+      <li><a href="#habilidades">Habilidades</a></li>
+      <li><a href="#experiencia">Experiencia</a></li>
+      <li><a href="#educacion">Educación</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <main> <!-- l. main -->
+
+    <section id="perfil">
+      <h2>Perfil Profesional</h2>
+      <p><strong>Aquí poner a que me dedico</strong> más cosas <mark>aquí poner lo que más tengo habilidad</mark>.</p> <!-- e. Texto enriquecido -->
+    </section>
+
+    <section id="habilidades">
+      <h2>Habilidades Técnicas</h2>
+      <ul class="skills"> <!-- g. Lista -->
+        <li><i class="fab fa-html5"></i> HTML5</li> <!-- f. Icono -->
+        <li><i class="fab fa-css3-alt"></i> CSS3</li>
+        <li><i class="fab fa-js"></i> JavaScript</li>
+        <li><i class="fab fa-react"></i> React</li>
+        <li><i class="fab fa-node-js"></i> Node.js</li>
+      </ul>
+    </section>
+
+    <section id="experiencia">
+      <h2>Experiencia Laboral</h2>
+      <article class="card"> <!-- l. article -->
+        <h3>Google - Desarrollador Frontend</h3>
+        <p><i class="fas fa-calendar"></i> Ene 2021 - Presente</p>
+        <ul>
+          <li>Desarrollo de interfaces modernas con React y CSS Grid.</li>
+          <li>Optimización de rendimiento web y accesibilidad.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section id="educacion">
+      <h2>Educación</h2>
+      <table> <!-- h. Tabla -->
+        <thead>
+          <tr><th>Institución</th><th>Programa</th><th>Año</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Universidad Web</td><td>Ing. Sistemas</td><td>2020</td></tr>
+          <tr><td>Platzi</td><td>Frontend Developer</td><td>2023</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="proyectos">
+      <h2>Proyectos Destacados</h2>
+      <div class="proyecto">
+        <h3>Portafolio Personal</h3>
+        <p>Diseñado con HTML5, CSS3 y JavaScript puro.</p>
+        <a href="https://github.com/juanperez/portafolio" target="_blank">
+          <i class="fab fa-github"></i> Repositorio en GitHub
+        </a>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <h2>Contacto</h2>
+      <p><i class="fas fa-envelope"></i> nombre.apellido@email.com</p>
+      <p><i class="fas fa-phone"></i> +52 555 123 4567</p>
+    </section>
+
+    <section id="formulario"> <!-- m. Formularios -->
+      <h2>Formulario de Contacto</h2>
+      <form>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+
+        <label for="mensaje">Mensaje:</label>
+        <textarea id="mensaje" name="mensaje" rows="4" placeholder="Escribe tu mensaje aquí..."></textarea>
+
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+
+    <section class="media">
+      <h2>Galería y Multimedia</h2> <!-- n. Multimedia tmb se puede acomodar y centrar mediante css-->
+
+      <img src="https://thumbs.dreamstime.com/b/vector-de-perfil-avatar-predeterminado-foto-usuario-medios-sociales-icono-183042379.jpg" 
+        alt="Imagen01"
+        width="300"
+        style="display:block; 
+        margin:auto;" />
+
+      <audio controls style="display:block; margin:1rem auto;">
+        <source src="https://www.w3schools.com/html/horse.mp3" type="audio/mpeg">
+      </audio>
+
+
+      <video controls width="400" style="display:block; margin:1rem auto;">
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+      </video>
+
+    </section>
+
+  </main>
+
+  <footer id="footer"> <!-- l. Estructura Semántica -->
+    <p>&copy; 2025 Mi primera página web | PROTECSA</p> <!-- e. Etiquetas de texto -->
+    <div> <!-- j. Elementos de línea y de bloque -->
+      <a href="https://www.linkedin.com">LinkedIn</a> <!-- i. Enlaces y marcadores -->
+      <a href="https://x.com">Twitter</a> <!-- i. Enlaces y marcadores -->
+    </div>
+  </footer>
+
+</body>
+</html>

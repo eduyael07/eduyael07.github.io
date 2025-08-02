@@ -1,0 +1,119 @@
+
+
+/* b. Selector por etiqueta + d. Colores y fuentes + e. Modelo de cajas */
+body {
+  margin: 0;
+  background-image: url(foto1.webp), url(foto2.webp);    /* h. CSS Backgrounds */
+  color: #ffffff; 
+  background-position: top, bottom;
+  background-attachment: scroll;
+  background-size: 100% 50%, 100% 50%; /* h. CSS Backgrounds */
+  background-repeat: no-repeat;             /* d. Colores */
+  font-family: sans-serif; /* d. Fuentes */
+  padding: 1rem;/* h. CSS Backgrounds */
+}
+
+/* b. Selector por clase + e. Modelo de cajas + d. Colores */
+header, footer {
+  background-image: url(https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExeXVtN2g5ZzhreTJ4Z2xpZHR4aHJidmkxYjJ4cmYxM2h6MTIwNm9lMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/TZf4ZyXb0lXXi/giphy.gif);        /* h. CSS Backgrounds */
+  padding: 1rem;
+  background-attachment: scroll;
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+}
+
+/* d. Colores + f. Bordes */
+h1, h2 {
+  color: hotpink;
+  border-bottom: 1px solid hotpink;
+  padding-bottom: 0.5rem;
+}
+
+/* b. Selectores por clase + c. Selectores básicos */
+.btn {
+  display: inline-block;   /* j. Elemento en línea modificado a bloque */
+  background: hotpink;     /* d. Colores */
+  color: black;
+  padding: 0.5rem 1rem;    /* e. Modelo de cajas */
+  border-radius: 5px;      /* f. Bordes */
+  text-decoration: none;
+}
+
+/* nav con flexbox + modelo de cajas */
+nav ul {
+  display: flex;           /* e. Flexbox */
+  justify-content: center;
+  gap: 1rem;               /* e. Modelo de cajas */
+  list-style: none;
+  padding: 0;
+}
+
+/* d. Colores */
+nav a {
+  color: hotpink;
+  text-decoration: none;
+}
+
+/* Secciones generales */
+section {
+  background-color: #000000;   /* h. CSS Backgrounds */
+  padding: 1rem;
+  margin: 1rem auto;
+  max-width: 800px;
+  border-radius: 6px;      /* f. Bordes */
+}
+
+/* g. Especificidad - ID tiene más peso que clase */
+#especial {
+  color: lime;
+}
+
+/* h. Tabla básica */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+th, td {
+  border: 1px solid #444;  /* f. Bordes */
+  padding: 0.5rem;
+}
+
+/* m. Formularios */
+form {
+  display: flex;               /* e. Modelo de cajas */
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+input, textarea {
+  padding: 0.5rem;             /* e. Modelo de cajas */
+  border: none;
+  border-radius: 4px;          /* f. Bordes */
+}
+
+/* j. Línea vs bloque visual */
+.inline {
+  background: pink;
+  display: inline;
+}
+
+.block {
+  background: violet;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+/* i. Media query responsiva */
+@media (max-width: 600px) {
+  body {
+    background: #000;
+  }
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+}
