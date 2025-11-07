@@ -1,0 +1,14 @@
+site_name: Haz tu propia PCB
+site_description: Guía completa para diseñar y fabricar tu propia placa de circuito impreso (PCB)
+
+extra_css:
+  - style.css
+
+nav:
+  - Inicio: index.md
+  - Guia: about.md
+  - Más: about2.md
+
+theme:
+  name: null
+  custom_dir: 'cinder'

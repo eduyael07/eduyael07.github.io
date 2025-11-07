@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Guía completa para diseñar y fabricar tu propia placa de circuito impreso (PCB)">
+    
+    
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    
+    <title>Guia - Haz tu propia PCB</title>
+    
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../css/base.min.css" rel="stylesheet">
+    <link href="../css/cinder.min.css" rel="stylesheet">
+
+    
+        
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/styles/github.min.css">
+        
+    
+    <link href="../style.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+
+            
+              <a class="navbar-brand" href="..">Haz tu propia PCB</a>
+            
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Inicio</a>
+                    </li>
+                
+                
+                
+                    <li class="active">
+                        <a href="./">Guia</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../about2/">Más</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="..">
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="next" href="../about2/">
+                            Next <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#guia-para-el-diseno-y-fabricacion-de-una-pcb">Guía para el Diseño y Fabricación de una PCB</a></li>
+            <li class="second-level"><a href="#1-diseno-de-la-pcb-con-easyeda">1. Diseño de la PCB con EasyEDA</a></li>
+                
+            <li class="second-level"><a href="#2-descarga-del-shield-para-arduino-uno">2. Descarga del shield para Arduino Uno</a></li>
+                
+            <li class="second-level"><a href="#3-edicion-del-diseno">3. Edición del diseño</a></li>
+                
+            <li class="second-level"><a href="#4-conexion-mediante-pistas-tracks">4. Conexión mediante pistas (Tracks)</a></li>
+                
+            <li class="second-level"><a href="#5-configuracion-final-del-diseno">5. Configuración final del diseño</a></li>
+                
+            <li class="second-level"><a href="#6-guardado-del-proyecto">6. Guardado del proyecto</a></li>
+                
+            <li class="second-level"><a href="#7-preparacion-para-fabricacion">7. Preparación para fabricación</a></li>
+                
+                <li class="third-level"><a href="#fabricacion-industrial">🔸 Fabricación industrial</a></li>
+                <li class="third-level"><a href="#fabricacion-casera">🔸 Fabricación casera</a></li>
+            <li class="second-level"><a href="#8-ensamblaje-y-soldadura-de-componentes">8. Ensamblaje y soldadura de componentes</a></li>
+                
+            <li class="second-level"><a href="#9-prueba-final">9. Prueba final</a></li>
+                
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1 id="guia-para-el-diseno-y-fabricacion-de-una-pcb">Guía para el Diseño y Fabricación de una PCB</h1>
+<p>En esta guía aprenderás paso a paso cómo <strong>diseñar y fabricar una placa de circuito impreso (PCB)</strong>, utilizando la herramienta <strong>EasyEDA</strong> para el diseño digital y dos métodos de fabricación: <strong>industrial</strong> mediante archivos Gerber y <strong>manual</strong> con transferencia térmica y cloruro férrico.</p>
+<hr />
+<h2 id="1-diseno-de-la-pcb-con-easyeda">1. Diseño de la PCB con EasyEDA</h2>
+<p><strong>Instalación del software</strong></p>
+<p>EasyEDA es una plataforma gratuita para diseño electrónico que ofrece tanto un <em>editor en línea</em> como una <em>versión descargable</em>.<br />
+Puedes acceder desde: <a href="https://easyeda.com">https://easyeda.com</a></p>
+<p>Al crear una cuenta, podrás diseñar tus esquemas eléctricos, generar el trazado de la PCB y exportar tus archivos listos para fabricar.</p>
+<blockquote>
+<p>💡 <strong>Consejo:</strong> si trabajas en distintos dispositivos, utiliza la versión en línea para mantener tus proyectos sincronizados en la nube.</p>
+</blockquote>
+<p><img alt="Interfaz de EasyEDA" src="../img/easyeda_editor.png" /></p>
+<hr />
+<h2 id="2-descarga-del-shield-para-arduino-uno">2. Descarga del shield para Arduino Uno</h2>
+<p>Para facilitar el diseño, inicia con un <strong>modelo base de shield</strong> compatible con <strong>Arduino Uno</strong>.<br />
+Puedes encontrarlo en la biblioteca de EasyEDA:</p>
+<ol>
+<li>Ve a <strong>Libraries &gt; Modules &gt; Arduino Shield</strong>.  </li>
+<li>Importa el modelo a tu proyecto.  </li>
+<li>Guárdalo como plantilla para futuras modificaciones.</li>
+</ol>
+<p>Esto servirá como base para ubicar tus componentes y conectar tus señales.</p>
+<p><img alt="Modelo de shield" src="../img/arduino_shield.png" /></p>
+<hr />
+<h2 id="3-edicion-del-diseno">3. Edición del diseño</h2>
+<p>En esta etapa agregarás los componentes necesarios para tu proyecto:</p>
+<ol>
+<li>Abre la librería de componentes desde el panel lateral.  </li>
+<li>Busca los elementos requeridos (resistencias, capacitores, conectores, etc.).  </li>
+<li>Coloca los componentes en posiciones lógicas y ordenadas.  </li>
+</ol>
+<blockquote>
+<p>📏 <strong>Recomendación:</strong> agrupa los componentes por función (alimentación, control, sensores, etc.) para minimizar cruces de pistas.</p>
+</blockquote>
+<p><img alt="Colocación de componentes" src="../img/componentes.png" /></p>
+<hr />
+<h2 id="4-conexion-mediante-pistas-tracks">4. Conexión mediante pistas (Tracks)</h2>
+<p>Con los componentes ubicados, traza las <strong>pistas eléctricas</strong> que los interconectan:</p>
+<ol>
+<li>En el menú superior, selecciona:<br />
+<code>Herramientas PCB &gt; Track (Pistas)</code></li>
+<li>Conecta cada pin siguiendo tu diagrama esquemático.  </li>
+<li>Verifica cuidadosamente las siguientes conexiones:</li>
+<li><strong>VCC (5V)</strong>: conexión a la fuente de alimentación del Arduino.  </li>
+<li><strong>GND (Tierra)</strong>: unión con el plano de tierra.  </li>
+<li><strong>TX / RX</strong>: comunicación serial (si aplica).  </li>
+<li>Otras señales específicas de tu proyecto.</li>
+</ol>
+<blockquote>
+<p>⚙️ Mantén las pistas lo más cortas posibles y evita ángulos de 90°, ya que dificultan el grabado químico y pueden generar ruido eléctrico.</p>
+</blockquote>
+<p><img alt="Trazado de pistas" src="../img/tracks.png" /></p>
+<hr />
+<h2 id="5-configuracion-final-del-diseno">5. Configuración final del diseño</h2>
+<p>Antes de exportar o fabricar la PCB, verifica los siguientes parámetros:</p>
+<ul>
+<li><strong>Ancho de pistas:</strong> ajusta el grosor según la corriente que transportarán (recomendado: ≥0.4 mm para señales y ≥1 mm para alimentación).  </li>
+<li><strong>Opacidad:</strong> asegúrate de que todas las pistas y pads tengan <strong>opacidad del 100%</strong> (sin transparencia).  </li>
+<li><strong>Capa superior:</strong> coloca todas las pistas en la capa <strong>Top Layer</strong> si planeas fabricar de forma manual.  </li>
+<li><strong>Distancia mínima:</strong> deja al menos <strong>0.3 mm</strong> entre pistas para evitar cortocircuitos durante el grabado químico.</li>
+</ul>
+<hr />
+<h2 id="6-guardado-del-proyecto">6. Guardado del proyecto</h2>
+<p>Guarda tu diseño desde el menú:  </p>
+<p>Puedes también guardar el esquema eléctrico asociado para futuras modificaciones.<br />
+EasyEDA guarda automáticamente una copia en la nube si estás conectado a tu cuenta.</p>
+<hr />
+<h2 id="7-preparacion-para-fabricacion">7. Preparación para fabricación</h2>
+<h3 id="fabricacion-industrial">🔸 Fabricación industrial</h3>
+<p>Para enviar tu diseño a una fábrica profesional:</p>
+<ol>
+<li>En EasyEDA, dirígete a:<br />
+<code>Fabricación &gt; Archivo fabricación PCB (Gerber)</code></li>
+<li>Descarga el archivo <code>.zip</code> con los <strong>archivos Gerber</strong>.  </li>
+<li>Sube ese archivo al sitio de un fabricante, como <a href="https://jlcpcb.com">JLCPCB</a>, <a href="https://pcbway.com">PCBWay</a> o similar.</li>
+<li>Selecciona el tamaño, número de capas, color del solder mask, grosor, y realiza el pedido.</li>
+</ol>
+<p><img alt="Exportar Gerber" src="../img/jlcpcb.png" /></p>
+<hr />
+<h3 id="fabricacion-casera">🔸 Fabricación casera</h3>
+<p>Si deseas realizar tu PCB manualmente, sigue cuidadosamente los siguientes pasos:</p>
+<h4 id="1-exportar-el-diseno">1️⃣ Exportar el diseño</h4>
+<ul>
+<li>En EasyEDA, selecciona <strong>Archivo &gt; Exportar como PDF</strong>.  </li>
+<li>Asegúrate de que el <strong>escala sea 1:1</strong> (sin ajuste automático).  </li>
+<li>Verifica que las pistas tengan <strong>opacidad al 100%</strong> para lograr un contraste fuerte al imprimir.</li>
+</ul>
+<h4 id="2-impresion-del-diseno">2️⃣ Impresión del diseño</h4>
+<ul>
+<li>Imprime el diseño sobre <strong>papel transfer</strong> o <strong>papel satinado</strong> utilizando una impresora láser.  </li>
+<li>Evita impresoras de inyección de tinta, ya que la tinta no se transfiere correctamente.</li>
+</ul>
+<h4 id="3-transferencia-termica">3️⃣ Transferencia térmica</h4>
+<ul>
+<li>Coloca el papel impreso sobre una <strong>placa de cobre limpia y lijada</strong>.  </li>
+<li>Usa una <strong>plancha caliente (sin vapor)</strong> durante unos minutos aplicando presión uniforme.  </li>
+<li>Cuando el diseño se haya adherido bien, deja enfriar la placa y retira con cuidado el papel.<br />
+El tóner quedará adherido al cobre, formando las pistas del circuito.</li>
+</ul>
+<h4 id="4-grabado-quimico">4️⃣ Grabado químico</h4>
+<ul>
+<li>En un recipiente plástico, vierte <strong>cloruro férrico (FeCl₃)</strong>.  </li>
+<li>Sumerge la placa y agita suavemente para acelerar la reacción.  </li>
+<li>Espera hasta que el cobre no cubierto por el tóner se disuelva completamente.</li>
+</ul>
+<blockquote>
+<p>⚠️ <strong>Precaución:</strong> utiliza guantes, gafas protectoras y trabaja en un área ventilada. El cloruro férrico es corrosivo.</p>
+</blockquote>
+<h4 id="5-limpieza-final">5️⃣ Limpieza final</h4>
+<ul>
+<li>Retira la placa del ácido y enjuágala con abundante agua.  </li>
+<li>Con un cepillo y alcohol isopropílico, limpia la superficie para eliminar los restos de tóner.  </li>
+<li>Deberán quedar visibles solo las <strong>pistas de cobre</strong>.</li>
+</ul>
+<h4 id="6-perforacion-y-soldadura">6️⃣ Perforación y soldadura</h4>
+<ul>
+<li>Realiza los agujeros con un mini taladro según el tamaño de los pines.  </li>
+<li>Coloca y suelda cada componente en su posición correspondiente.  </li>
+<li>Revisa que las soldaduras sean limpias, brillantes y sin puentes.</li>
+</ul>
+<h4 id="7-pruebas-electricas">7️⃣ Pruebas eléctricas</h4>
+<ul>
+<li>Conecta la PCB a la fuente de alimentación o al Arduino.  </li>
+<li>Mide las tensiones y verifica continuidad entre las pistas.  </li>
+<li>Si todo está correcto, la PCB está lista para usarse.</li>
+</ul>
+<p><img alt="Fabricación casera" src="../img/casera.jpg" /></p>
+<hr />
+<h2 id="8-ensamblaje-y-soldadura-de-componentes">8. Ensamblaje y soldadura de componentes</h2>
+<p>Durante el ensamblaje final:</p>
+<ol>
+<li>Inserta los componentes en sus respectivas posiciones según el diseño.  </li>
+<li>Suelda primero los componentes más pequeños (resistencias, jumpers, etc.) y deja los más grandes para el final.  </li>
+<li>Evita aplicar calor excesivo para no dañar las pistas.  </li>
+<li>Limpia los residuos de flux con alcohol isopropílico.</li>
+</ol>
+<p><img alt="Soldadura de componentes" src="../img/soldadura.jpg" /></p>
+<hr />
+<h2 id="9-prueba-final">9. Prueba final</h2>
+<p>Conecta la placa a la alimentación y realiza las pruebas funcionales.<br />
+Comprueba continuidad, polaridad y señales.<br />
+Si todo funciona según lo previsto, ¡has completado exitosamente tu PCB! 🎉</p>
+<p><img alt="PCB finalizada" src="../img/final.jpg" /></p>
+<hr />
+<blockquote>
+<p>💾 <strong>Consejo final:</strong> guarda tus archivos Gerber, el PDF de impresión y el proyecto EasyEDA en una carpeta organizada para futuras modificaciones o duplicaciones del diseño.</p>
+</blockquote></div>
+        
+        
+    </div>
+
+    
+      <footer class="col-md-12 text-center">
+          
+          
+            <hr>
+            <p>
+            <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+            </p>
+          
+
+          
+          
+      </footer>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+
+    
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/highlight.min.js"></script>
+        
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    <script>var base_url = ".."</script>
+    
+    <script src="../js/base.js"></script>
+    <script src="../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+</html>
