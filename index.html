@@ -48,14 +48,6 @@
 
         <!-- Collapsed navigation -->
         <div class="navbar-header">
-            <!-- Expander button -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            
 
             <!-- Main title -->
 
@@ -66,43 +58,11 @@
 
         <!-- Expanded navigation -->
         <div class="navbar-collapse collapse">
-                <!-- Main navigation -->
-                <ul class="nav navbar-nav">
-                
-                
-                    <li class="active">
-                        <a href=".">Inicio</a>
-                    </li>
-                
-                
-                
-                    <li >
-                        <a href="about/">Guia</a>
-                    </li>
-                
-                
-                
-                    <li >
-                        <a href="about2/">Más</a>
-                    </li>
-                
-                
-                </ul>
 
             <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
                             <i class="fas fa-search"></i> Search
-                        </a>
-                    </li>
-                    <li class="disabled">
-                        <a rel="prev" >
-                            <i class="fas fa-arrow-left"></i> Previous
-                        </a>
-                    </li>
-                    <li >
-                        <a rel="next" href="about/">
-                            Next <i class="fas fa-arrow-right"></i>
                         </a>
                     </li>
             </ul>
@@ -115,28 +75,275 @@
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="first-level active"><a href="#bienvenido-al-manual-de-diseno-y-fabricacion-de-pcbs">Bienvenido al Manual de Diseño y Fabricación de PCBs</a></li>
-            <li class="second-level"><a href="#sugerencia">Sugerencia</a></li>
+        <li class="first-level active"><a href="#manual-de-diseno-y-fabricacion-de-pcbs">Manual de Diseño y Fabricación de PCBs</a></li>
+            <li class="second-level"><a href="#objetivos">Objetivos</a></li>
+                
+        <li class="first-level "><a href="#guia-practica-de-diseno-y-fabricacion">Guía Práctica de Diseño y Fabricación</a></li>
+            <li class="second-level"><a href="#1-diseno-con-easyeda">1. Diseño con EasyEDA</a></li>
+                
+            <li class="second-level"><a href="#2-modelo-base-de-shield-para-arduino-uno">2. Modelo base de shield para Arduino Uno</a></li>
+                
+            <li class="second-level"><a href="#3-colocacion-de-componentes">3. Colocación de componentes</a></li>
+                
+            <li class="second-level"><a href="#4-ruteo-de-pistas">4. Ruteo de pistas</a></li>
+                
+            <li class="second-level"><a href="#5-verificacion-del-diseno">5. Verificación del diseño</a></li>
+                
+            <li class="second-level"><a href="#6-exportacion-y-guardado">6. Exportación y guardado</a></li>
+                
+            <li class="second-level"><a href="#7-fabricacion">7. Fabricación</a></li>
+                
+                <li class="third-level"><a href="#a-fabricacion-industrial">A) Fabricación industrial</a></li>
+                <li class="third-level"><a href="#b-fabricacion-casera">B) Fabricación casera</a></li>
+            <li class="second-level"><a href="#8-ensamblaje-y-soldadura">8. Ensamblaje y soldadura</a></li>
+                
+            <li class="second-level"><a href="#9-prueba-final">9. Prueba final</a></li>
+                
+        <li class="first-level "><a href="#mas-recursos">Más recursos</a></li>
+            <li class="second-level"><a href="#sitios-de-interes">Sitios de interés</a></li>
+                
+            <li class="second-level"><a href="#videos-recomendados">Videos recomendados</a></li>
+                
+            <li class="second-level"><a href="#creditos">Créditos</a></li>
                 
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
 
-<h1 id="bienvenido-al-manual-de-diseno-y-fabricacion-de-pcbs">Bienvenido al Manual de Diseño y Fabricación de PCBs</h1>
-<p>El propósito de este manual es guiarte paso a paso en el proceso completo de <strong>diseño, elaboración y prueba de una placa de circuito impreso (PCB)</strong>, desde su concepción en software hasta su fabricación física.  </p>
-<p>A lo largo de esta guía aprenderás a utilizar <strong>EasyEDA</strong>, una herramienta gratuita y accesible para diseñar circuitos electrónicos profesionales. También descubrirás cómo generar los <strong>archivos Gerber</strong> necesarios para la producción industrial y, si lo prefieres, cómo <strong>fabricar tu propia placa de forma manual</strong> empleando el método de transferencia térmica con <strong>cloruro férrico</strong>.</p>
+<h1 id="manual-de-diseno-y-fabricacion-de-pcbs">Manual de Diseño y Fabricación de PCBs</h1>
+<p>El propósito de este manual es guiarte paso a paso en el proceso completo de <strong>diseño, elaboración y prueba de una placa de circuito impreso (PCB)</strong>, desde su concepción en software hasta su fabricación física.</p>
+<p>Aprenderás a utilizar <strong>EasyEDA</strong>, una herramienta gratuita y accesible para diseñar circuitos electrónicos profesionales, a generar los <strong>archivos Gerber</strong> para producción industrial y a <strong>fabricar tu propia placa manualmente</strong> mediante transferencia térmica con <strong>cloruro férrico</strong>.</p>
 <p><img alt="Ejemplo de PCB" src="img/pcb_intro.jpg" /></p>
-<p>Las PCBs son la base de prácticamente todos los dispositivos electrónicos modernos: desde microcontroladores y sensores hasta computadoras y sistemas de automatización. Dominar su diseño no solo te permitirá <strong>materializar tus proyectos electrónicos</strong>, sino también comprender mejor los principios de conexión, distribución de señales y manufactura en electrónica.</p>
-<p>En este manual encontrarás explicaciones claras, acompañadas de imágenes y consejos prácticos para evitar errores comunes durante el proceso.</p>
+<p>Las PCBs son la base de prácticamente todos los dispositivos electrónicos modernos. Dominar su diseño te permitirá <strong>materializar tus proyectos</strong> y comprender los principios de conexión y manufactura en electrónica.</p>
 <hr />
-<p>Al finalizar, serás capaz de:
-- Diseñar una PCB funcional y bien estructurada utilizando <strong>EasyEDA</strong>.<br />
-- Generar y entender los <strong>archivos Gerber</strong> para la fabricación profesional.<br />
-- Fabricar tu propia placa <strong>de manera casera</strong>, utilizando papel transfer y cloruro férrico.<br />
-- Ensamblar, soldar y probar tus componentes electrónicos correctamente.  </p>
+<h2 id="objetivos">Objetivos</h2>
+<p>Al finalizar este manual, podrás:
+- Diseñar una PCB funcional en <strong>EasyEDA</strong>.<br />
+- Exportar y entender <strong>archivos Gerber</strong> para fabricación profesional.<br />
+- Elaborar tu propia PCB <strong>de forma casera</strong> con papel transfer y cloruro férrico.<br />
+- Ensamblar, soldar y probar tu circuito correctamente.</p>
+<blockquote>
+<p>💡 Si es tu primera vez trabajando con PCBs, visita la sección de <a href="#más-recursos"><strong>Más recursos</strong></a> antes de comenzar con la guía práctica.</p>
+</blockquote>
 <hr />
-<h3 id="sugerencia"><strong>Sugerencia</strong></h3>
-<p>Si es tu primera vez trabajando con PCBs, te recomendamos visitar la seccion de <a href="about2/"><strong>Más</strong></a> y revisar el material sugerido antes comenzar directamente con la sección <a href="about/"><strong>Guía</strong></a>, donde se detallan los pasos prácticos para el diseño y fabricación.</p></div>
+<h1 id="guia-practica-de-diseno-y-fabricacion">Guía Práctica de Diseño y Fabricación</h1>
+<h2 id="1-diseno-con-easyeda">1. Diseño con EasyEDA</h2>
+<p>EasyEDA es una plataforma gratuita (en línea o descargable) disponible en <a href="https://easyeda.com">https://easyeda.com</a>.<br />
+Permite crear esquemas eléctricos, rutear la PCB y generar los archivos para su fabricación.</p>
+<blockquote>
+<p>Usa la versión en línea si trabajas desde distintos dispositivos.</p>
+</blockquote>
+<p><img alt="Interfaz de EasyEDA" src="img/easyeda_editor.png" /></p>
+<hr />
+<h2 id="2-modelo-base-de-shield-para-arduino-uno">2. Modelo base de shield para Arduino Uno</h2>
+<p>Para comenzar, usa un <strong>modelo de shield</strong> de Arduino Uno disponible en la biblioteca de EasyEDA:
+1. Ve a <strong>Libraries &gt; Modules &gt; Arduino Shield</strong>.<br />
+2. Importa el modelo a tu proyecto.<br />
+3. Guárdalo como plantilla.</p>
+<p><img alt="Modelo de shield" src="img/arduino_shield.png" /></p>
+<hr />
+<h2 id="3-colocacion-de-componentes">3. Colocación de componentes</h2>
+<p>Agrega los componentes de tu circuito desde la librería:</p>
+<ol>
+<li>Busca resistencias, capacitores, conectores, etc.  </li>
+<li>Colócalos de forma ordenada según su función.  </li>
+</ol>
+<blockquote>
+<p><strong>Tip:</strong> agrupa los componentes por tipo de señal (alimentación, control, sensores) para minimizar cruces de pistas.</p>
+</blockquote>
+<p><img alt="Colocación de componentes" src="img/componentes.png" /></p>
+<hr />
+<h2 id="4-ruteo-de-pistas">4. Ruteo de pistas</h2>
+<p>Conecta los componentes usando la herramienta <strong>Track (Pistas)</strong>:</p>
+<ol>
+<li>Selecciona <code>Herramientas PCB &gt; Track</code>.  </li>
+<li>Une los pines según tu diagrama esquemático.  </li>
+<li>Revisa conexiones clave: <strong>VCC</strong>, <strong>GND</strong>, <strong>TX/RX</strong>, etc.</li>
+</ol>
+<blockquote>
+<p>Evita ángulos de 90° y mantén las pistas cortas para reducir ruido y facilitar el grabado.</p>
+</blockquote>
+<p><img alt="Trazado de pistas" src="img/tracks.png" /></p>
+<hr />
+<h2 id="5-verificacion-del-diseno">5. Verificación del diseño</h2>
+<p>Antes de exportar, asegúrate de:
+- Usar anchos de pista adecuados (≥0.4 mm para señales, ≥1 mm para alimentación).<br />
+- Tener <strong>opacidad al 100%</strong> en pistas y pads.<br />
+- Mantener <strong>distancia mínima de 0.3 mm</strong> entre pistas.<br />
+- Colocar todo en la <strong>Top Layer</strong> si fabricarás manualmente.</p>
+<hr />
+<h2 id="6-exportacion-y-guardado">6. Exportación y guardado</h2>
+<p>Guarda el proyecto y genera el esquema eléctrico para futuras ediciones.<br />
+Si estás en línea, EasyEDA sincroniza automáticamente tus archivos en la nube.</p>
+<hr />
+<h2 id="7-fabricacion">7. Fabricación</h2>
+<h3 id="a-fabricacion-industrial">A) Fabricación industrial</h3>
+<ol>
+<li>En EasyEDA selecciona:<br />
+<code>Fabricación &gt; Archivo fabricación PCB (Gerber)</code>.  </li>
+<li>Descarga el archivo <code>.zip</code>.  </li>
+<li>Súbelo a un fabricante como <a href="https://jlcpcb.com">JLCPCB</a> o <a href="https://pcbway.com">PCBWay</a>.  </li>
+<li>Configura color, grosor y cantidad antes de hacer el pedido.</li>
+</ol>
+<p><img alt="Exportar Gerber" src="img/jlcpcb.png" /></p>
+<hr />
+<h3 id="b-fabricacion-casera">B) Fabricación casera</h3>
+<p>Si prefieres realizar tu propia placa en casa, este método te permitirá obtener un resultado profesional sin depender de servicios externos.  </p>
+<p><strong><em>🧰 Materiales para la fabricación casera de una PCB</em></strong></p>
+<p><strong>Impresión del diseño</strong>
+- Impresora láser (no de tinta).<br />
+- Papel transfer o papel satinado.<br />
+- Tóner negro y tijeras o cúter.</p>
+<p><strong>Preparación de la placa</strong>
+- Placa virgen de cobre (FR1 o FR4).<br />
+- Lija fina (600–800) y alcohol isopropílico.<br />
+- Guantes y paño limpio.</p>
+<p><strong>Transferencia térmica</strong>
+- Plancha sin vapor o laminadora.<br />
+- Cinta térmica y recipiente con agua tibia.  </p>
+<p><strong>Grabado químico</strong>
+- Cloruro férrico (FeCl₃).<br />
+- Recipiente plástico o de vidrio (no metálico).<br />
+- Guantes, gafas y pinzas plásticas.</p>
+<p><strong>Limpieza y perforación</strong>
+- Alcohol o acetona para limpiar el tóner.<br />
+- Mini taladro y brocas (0.8–1 mm).<br />
+- Marcador permanente para retoques.</p>
+<p><strong>Soldadura y pruebas</strong>
+- Cautín, estaño y flux.<br />
+- Multímetro y fuente de alimentación.  </p>
+<blockquote>
+<p>⚠️ <strong>Consejo:</strong> trabaja en un área ventilada y usa protección personal. No viertas el cloruro férrico al drenaje.</p>
+</blockquote>
+<hr />
+<h4 id="1-exportar-el-diseno"><strong>1️⃣ Exportar el diseño</strong></h4>
+<ol>
+<li>En EasyEDA selecciona <strong>Archivo &gt; Exportar &gt; PDF</strong>.  </li>
+<li>Asegúrate de que la <strong>escala esté en 1:1</strong>, sin márgenes automáticos ni redimensionamiento.  </li>
+<li>Configura la <strong>opacidad al 100%</strong> en las pistas y pads para garantizar el máximo contraste.  </li>
+<li>Imprime únicamente las <strong>capas necesarias</strong> (Top Layer, Pads y Vías).  </li>
+</ol>
+<blockquote>
+<p><strong>Consejo:</strong> si tu placa tiene texto o logos, invierte horizontalmente la imagen antes de imprimir para que se transfiera correctamente al cobre.</p>
+</blockquote>
+<hr />
+<h4 id="2-impresion-del-diseno"><strong>2️⃣ Impresión del diseño</strong></h4>
+<ul>
+<li>Utiliza <strong>papel transfer térmico</strong> o <strong>papel satinado de revista</strong> (de superficie lisa y brillante).  </li>
+<li>Imprime con una <strong>impresora láser</strong>, nunca de inyección de tinta.  </li>
+<li>Verifica que las líneas y pads estén bien definidos y sin cortes.  </li>
+</ul>
+<blockquote>
+<p>Para circuitos muy finos (pistas &lt;0.3 mm), imprime en <strong>modo calidad alta o “Toner Save OFF”</strong>.</p>
+</blockquote>
+<hr />
+<h4 id="3-preparacion-de-la-placa-de-cobre"><strong>3️⃣ Preparación de la placa de cobre</strong></h4>
+<ol>
+<li>Corta la <strong>placa virgen</strong> al tamaño exacto de tu diseño.  </li>
+<li>Lija suavemente la superficie con <strong>lija fina (600 o 800)</strong> hasta eliminar la capa opaca.  </li>
+<li>Limpia con <strong>alcohol isopropílico o thinner</strong> para eliminar grasa o polvo.  </li>
+<li>Evita tocar la superficie con los dedos después de limpiar.</li>
+</ol>
+<blockquote>
+<p>Una superficie perfectamente limpia es clave para que el tóner se adhiera de forma uniforme.</p>
+</blockquote>
+<hr />
+<h4 id="4-transferencia-termica-del-diseno"><strong>4️⃣ Transferencia térmica del diseño</strong></h4>
+<ol>
+<li>Coloca la impresión sobre la placa con el <strong>tóner hacia el cobre</strong>.  </li>
+<li>Fija con cinta térmica o papel aluminio para evitar movimientos.  </li>
+<li>Con una <strong>plancha doméstica sin vapor</strong> o una <strong>laminadora térmica</strong>, aplica calor firme y uniforme durante <strong>5 a 8 minutos</strong>.  </li>
+<li>Presiona en círculos, especialmente sobre las zonas con pads o trazos delgados.  </li>
+<li>Deja enfriar la placa durante unos minutos y luego colócala en agua tibia para ablandar el papel.  </li>
+</ol>
+<p>Cuando el papel se despegue, el <strong>tóner negro quedará adherido al cobre</strong>, formando las pistas del circuito.</p>
+<blockquote>
+<p>Revisa que no haya interrupciones o huecos en las pistas; puedes corregir pequeños defectos con un marcador permanente resistente al ácido.</p>
+</blockquote>
+<hr />
+<h4 id="5-grabado-quimico"><strong>5️⃣ Grabado químico</strong></h4>
+<ol>
+<li>Prepara una solución de <strong>cloruro férrico (FeCl₃)</strong> en un recipiente plástico o de vidrio (nunca metálico).  </li>
+<li>Sumerge completamente la placa y <strong>agita suavemente</strong> cada 30 segundos para renovar el contacto con el cobre.  </li>
+<li>El proceso tarda entre <strong>10 y 30 minutos</strong>, dependiendo de la concentración y temperatura del ácido.  </li>
+<li>Cuando el cobre no cubierto desaparezca por completo, retira la placa con pinzas plásticas.  </li>
+</ol>
+<blockquote>
+<p>⚠️ <strong>Precauciones de seguridad:</strong>
+- Usa guantes, gafas protectoras y cubrebocas.<br />
+- Trabaja en un área bien ventilada o al aire libre.<br />
+- No deseches el cloruro férrico por el drenaje; guárdalo en una botella etiquetada para reuso o desecho especializado.  </p>
+</blockquote>
+<hr />
+<h4 id="6-limpieza-posterior"><strong>6️⃣ Limpieza posterior</strong></h4>
+<ol>
+<li>Lava la placa con abundante agua para detener la reacción química.  </li>
+<li>Con un paño o cepillo suave, elimina los restos de ácido.  </li>
+<li>Limpia el tóner usando <strong>alcohol isopropílico</strong> o <strong>acetona pura</strong>, hasta dejar visibles solo las pistas de cobre.  </li>
+<li>Seca completamente antes de continuar.</li>
+</ol>
+<blockquote>
+<p>Puedes aplicar una capa delgada de <strong>estaño químico</strong> o <strong>barniz protector</strong> para evitar la oxidación del cobre.</p>
+</blockquote>
+<hr />
+<h4 id="7-perforacion-y-montaje"><strong>7️⃣ Perforación y montaje</strong></h4>
+<ol>
+<li>Usa un <strong>mini taladro de alta velocidad (Dremel o similar)</strong> con brocas de 0.8 a 1 mm.  </li>
+<li>Perfora cada pad con cuidado, alineando el centro del agujero.  </li>
+<li>Elimina rebabas con una lija fina.  </li>
+<li>Inserta los componentes y suelda en el orden siguiente:</li>
+<li>Componentes más bajos (resistencias, puentes, jumpers).  </li>
+<li>Luego los medianos (capacitores, diodos, transistores).  </li>
+<li>Finalmente los grandes (conectores, microcontroladores, terminales).  </li>
+</ol>
+<blockquote>
+<p><strong>Tip:</strong> verifica la polaridad de diodos, LEDs y capacitores antes de soldar.</p>
+</blockquote>
+<hr />
+<h4 id="8-pruebas-electricas-y-acabado-final"><strong>8️⃣ Pruebas eléctricas y acabado final</strong></h4>
+<ol>
+<li>Con un multímetro, mide continuidad entre las pistas y verifica que no haya cortocircuitos.  </li>
+<li>Aplica una fuente de alimentación limitada en corriente para la primera prueba.  </li>
+<li>Comprueba tensiones en puntos clave del circuito.  </li>
+<li>Si todo funciona correctamente, limpia los residuos de flux con alcohol isopropílico.</li>
+</ol>
+<blockquote>
+<p>✅ En este punto, tu PCB está lista para integrarse en tu proyecto o montarse dentro de un gabinete.</p>
+</blockquote>
+<p><img alt="PCB casera finalizada" src="img/casera.jpg" /></p>
+<h2 id="8-ensamblaje-y-soldadura">8. Ensamblaje y soldadura</h2>
+<ol>
+<li>Inserta los componentes en su posición.  </li>
+<li>Suelda con cautín aplicando calor moderado.  </li>
+<li>Limpia residuos de flux con alcohol isopropílico.</li>
+</ol>
+<p><img alt="Soldadura de componentes" src="img/soldadura.jpg" /></p>
+<hr />
+<h2 id="9-prueba-final">9. Prueba final</h2>
+<p>Conecta la placa, mide tensiones y revisa continuidad.<br />
+Si todo funciona correctamente, ¡tu PCB está lista! </p>
+<p><img alt="PCB finalizada" src="img/final.jpg" /></p>
+<blockquote>
+<p>💾 Guarda tus archivos Gerber, PDF y proyecto EasyEDA en una carpeta organizada para futuras modificaciones.</p>
+</blockquote>
+<hr />
+<h1 id="mas-recursos">Más recursos</h1>
+<h3 id="sitios-de-interes">Sitios de interés</h3>
+<ul>
+<li>🔗 <a href="https://easyeda.com">EasyEDA</a>  </li>
+<li>🔗 <a href="https://jlcpcb.com">JLCPCB</a>  </li>
+<li>🔗 <a href="https://www.electronicboard.es/que-es-una-pcb/">¿Qué es una PCB?</a></li>
+</ul>
+<h3 id="videos-recomendados">Videos recomendados</h3>
+<ul>
+<li>🎥 <a href="https://www.youtube.com/watch?v=BHZ41x5EesI">Cómo hacer una PCB casera desde cero</a>  </li>
+<li>🎥 <a href="https://www.youtube.com/watch?v=RbIM6T8b3Ao">Uso de EasyEDA para esquemáticos y PCBs</a>  </li>
+<li>🎥 <a href="https://www.youtube.com/watch?v=NC2Vkf4pBKk">Cómo soldar con cautín y estaño (principiantes)</a></li>
+</ul>
+<hr />
+<h3 id="creditos">Créditos</h3>
+<p>Manual elaborado por <strong>Dana Anzaldo</strong>, <strong>Fernando Carrizosa</strong> y <strong>Eduardo Jiménez</strong>, como parte de un proyecto académico del <strong>Servicio Social</strong> en la <strong>Facultad de Ingeniería de la UNAM</strong>.</p>
+<p>El objetivo es difundir conocimientos sobre <strong>diseño electrónico y manufactura de PCBs</strong>, integrando herramientas digitales y métodos de fabricación artesanal.</p></div>
         
         
     </div>
@@ -241,5 +448,5 @@
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-11-07 19:59:41.312415+00:00
+Build Date UTC : 2025-11-08 21:34:26.172179+00:00
 -->
